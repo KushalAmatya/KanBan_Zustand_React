@@ -3,13 +3,8 @@ import Columns from "./components/Columns";
 
 function App() {
   return (
-    <div className="bg-gray-500">
-      <div className=" min-h-screen flex justify-center items-start">
-        <Columns state="PLANNED" />
-        <Columns state="ONGOING" />
-        <Columns state="DONE" />
-      </div>
-      <div className="absolute top-0 right-40 mt-4">
+    <div className="bg-gray-500 flex justify-between flex-col">
+      <div className="flex  text-center justify-center mt-4">
         <button
           onClick={() => {
             localStorage.clear();
@@ -19,6 +14,11 @@ function App() {
         >
           Reset Table
         </button>
+      </div>
+      <div className=" min-h-screen flex justify-center items-start">
+        <Columns state="PLANNED" />
+        <Columns state="ONGOING" />
+        <Columns state="DONE" />
       </div>
     </div>
   );
