@@ -12,9 +12,10 @@ const store = (set) => {
         localStorage.setItem("trelloData", JSON.stringify(updatedTasks));
         return { tasks: updatedTasks };
       }),
-    removeTask: (index) =>
+    removeTask: (title) =>
       set((store) => {
-        const updatedTasks = store.tasks.filter((_, i) => i !== index);
+        const updatedTasks = store.tasks.filter((task) => task.title !== title);
+
         localStorage.setItem("trelloData", JSON.stringify(updatedTasks));
         return { tasks: updatedTasks };
       }),
