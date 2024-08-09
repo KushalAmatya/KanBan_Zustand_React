@@ -27,7 +27,7 @@ export default function Columns({ state, confirm }) {
         moveTask(DraggedTask, state);
         setDraggedTask(null); // Clear the dragged task after moving
       }}
-      className={`text-white bg-gray-800 min-h-80 w-1/3 max-w-80 mt-4 mr-2 ml-2  p-2  shadow-2xl shadow-black rounded-lg drop-shadow-md ${
+      className={`text-white bg-gray-600 min-h-80 w-1/3 max-w-80 mt-4 mr-2 ml-2  p-2  border-black shadow-2xl shadow-black rounded-lg drop-shadow-md ${
         confirm === true ? "opacity-50" : ""
       }`}
     >
@@ -61,6 +61,12 @@ export default function Columns({ state, confirm }) {
               <button
                 className="bg-green-500 hover:bg-green-600 text-gray-200 hover:text-gray-400"
                 onClick={() => {
+                  for (let i = 0; i < tasks.length; i++) {
+                    if (tasks[i].title === text) {
+                      alert("Task already exists");
+                      return;
+                    }
+                  }
                   addTask(text, state);
                   setText("");
                   setIsAdding(false);

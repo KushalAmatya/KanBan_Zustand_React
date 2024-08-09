@@ -13,7 +13,7 @@ export default function Task({ title }) {
       draggable
       onDragStart={() => {
         setDraggedTask(task.title);
-        console.log("Task Dragged:", setDraggedTask);
+        // console.log("Task Dragged:", setDraggedTask);
       }}
       className="cursor-move bg-white flex flex-col justify-between rounded min-h-20 text-gray-800 p-2 mt-2"
     >

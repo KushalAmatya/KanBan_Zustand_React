@@ -11,7 +11,7 @@ const useLocalStorage = () => {
     newData = [...data, toAdd];
 
     localStorage.setItem("trelloData", JSON.stringify(newData));
-    console.log(newData);
+    console.log(`newData ${"trelloData"}:`, newData);
     setData(newData);
   };
 

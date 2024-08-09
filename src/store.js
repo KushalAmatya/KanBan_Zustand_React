@@ -18,7 +18,7 @@ const store = (set) => {
         return { tasks: updatedTasks };
       }),
     setDraggedTask: (title) => {
-      console.log("setDraggedTask called: " + title);
+      // console.log("setDraggedTask called: " + title);
       set(() => {
         return { draggedTask: title };
       });
