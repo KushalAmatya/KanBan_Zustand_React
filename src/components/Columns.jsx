@@ -4,24 +4,42 @@ import Task from "./Task";
 import useLocalStorage from "../utils/useLocalStorage";
 import { FaTimes } from "react-icons/fa";
 
-export default function Columns({ state }) {
+export default function Columns({ state, confirm }) {
   const [text, setText] = useState("");
   const [isAdding, setIsAdding] = useState(false);
   const { addItem, data } = useLocalStorage();
   const tasks = useStore((store) =>
     store.tasks.filter((task) => task.state === state)
   );
-  console.log(tasks);
+  const setDraggedTask = useStore((store) => store.setDraggedTask);
+  const moveTask = useStore((store) => store.moveTask);
   const addTask = useStore((store) => store.addTask);
+  const DraggedTask = useStore((store) => store.draggedTask);
+
   return (
-    <div className="text-white bg-gray-800 min-h-80 w-1/3 max-w-80 mt-4 mr-2 ml-2 rounded p-2">
+    <div
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}
+      onDrop={(e) => {
+        console.log("Task Dropped:", DraggedTask);
+
+        moveTask(DraggedTask, state);
+        setDraggedTask(null); // Clear the dragged task after moving
+      }}
+      className={`text-white bg-gray-800 min-h-80 w-1/3 max-w-80 mt-4 mr-2 ml-2  p-2  shadow-2xl shadow-black rounded-lg drop-shadow-md ${
+        confirm === true ? "opacity-50" : ""
+      }`}
+    >
       <div className="flex justify-between">
         <p className="font-serif text-xl">{state}</p>
         <button
           onClick={() => {
             setIsAdding(true);
           }}
-          className="bg-green-500 hover:bg-green-600 text-gray-200 hover:text-gray-400 rounded p-1 "
+          className={`bg-green-500 hover:bg-green-600 text-gray-200 hover:text-gray-400 rounded p-1 ${
+            state === "DONE" ? "hidden" : ""
+          }`}
         >
           Add
         </button>
@@ -57,7 +75,7 @@ export default function Columns({ state }) {
                   setIsAdding(false);
                 }}
               >
-                <FaTimes />
+                <FaTimes className="hover:text-red-900" />
               </button>
             </div>
           </div>
